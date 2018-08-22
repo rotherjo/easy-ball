@@ -1,0 +1,51 @@
+
+<div class="ui-g-12">
+
+	<!-- Logo -->
+	<div class="ui-g-1 ui-xl-1 ui-l-1 ui-lg-1 ui-md-1 ui-sm-2">
+		<img alt="logo" style="width:50px" src='./../../../Images/logo-kl.png' align="right">
+	</div>
+	
+	<!-- Firmenname -->
+	<div class="ui-g-4 ui-xl-4 ui-l-4 ui-lg-5 ui-md-5 ui-sm-6">
+		<h1>{{ firmenname }}</h1><h1 class="TODO">header->toolbar & toggleable Menu & Kontakt-divs zu Buttons machen</h1>
+	</div>
+	
+	<!-- kontakte, Support, etc -->
+	<div class="ui-g-2 	
+				ui-xl-3 
+				ui-l-3 	
+				ui-lg-4 
+				ui-md-4 
+				ui-sm-12 
+				pull-right" align="center">
+		<a routerLink="/login">
+			<div class="ui-g-5 ui-sm-5 but">
+				Login
+			</div>
+		</a>
+		<a routerLink="/kontakt">
+			<div class="ui-g-5 ui-sm-5 ui-g-offset-1 but">
+				Kontakt
+			</div>
+		</a>
+	</div>		
+</div>
+
+<p-toolbar class="ui-g-12">
+    <div class="ui-toolbar-group-left">
+		<img alt="logo" style="width:50px" src='./../../../Images/logo-kl.png'>
+
+		{{ firmenname }}
+    	
+        <button pButton type="button" label="New" icon="pi pi-plus"></button>
+        <button pButton type="button" label="Upload" icon="pi pi-upload" class="ui-button-success"></button>
+            
+        <i class="pi pi-bars"></i>
+    </div>
+    
+    <div class="ui-toolbar-group-right ui-g-3">
+    		<a routerLink="/login">   <div class="ui-g-5 but">Login</div>   </a>
+			<a routerLink="/kontakt"> <div class="ui-g-5 but">Kontakt</div> </a>
+    </div>
+</p-toolbar>

@@ -1,0 +1,16 @@
+
+h1 {
+	color: green;
+	margin: 5px;
+}
+
+.but {
+	background-color: green;
+	color: white;
+	border-radius: 3px;
+}
+
+.navi {
+	position: absolute;
+	right: 30px;
+}

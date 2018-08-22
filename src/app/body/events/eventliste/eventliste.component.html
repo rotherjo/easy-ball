@@ -1,0 +1,129 @@
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+
+<div id="text">
+	<h2>Eventliste</h2>
+	<p>
+	  Liste der eingetragenen Events und Möglichkeite weitere hinzuzufügen.
+	</p>
+</div>
+
+<div style="margin: 5px" id="events-tabelle">
+<p-table [columns]="selectedColumns" [value]="events" [autoLayout]=true [responsive]="true">
+    
+    <!-- Select & Suchfeld -->
+    <ng-template pTemplate="caption">
+    	<div>
+	    	<div style="text-align:left">
+	            <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+	                        selectedItemsLabel="{0} Spalten ausgewählt" [style]="{minWidth: '200px'}" defaultLabel="Wähle Spalten"></p-multiSelect>
+	        </div>
+	        <div style="text-align: right">        
+	            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+	            <input type="text" pInputText size="25" placeholder="Globaler Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+	        </div>
+        </div> 
+    </ng-template>
+    
+    <!-- header -->
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+        	<!-- Kopfzeile mit Beschriftung der Spalten -->
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+        <tr>
+        	<!-- Suchfelder der Spalten -->
+            <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                <input class="ui-sm-2 pull-right" *ngSwitchCase="'id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" size="2">
+                <input *ngSwitchCase="'ename'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" size="15">
+                <input *ngSwitchCase="'edatum'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" size="10">
+                <input *ngSwitchCase="'eort'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" size="15">
+                <div *ngSwitchCase="'eanz'">
+                    mehr als {{anzFilter}}
+                    <i (click)="yearFilter=null;dt.filter(null, col.field, col.filterMatchMode)" style="cursor:pointer" *ngIf="anzFilter"></i>
+                    <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="anzFilter" [min]="0" [max]="20" (onChange)="onAnzChange($event, dt)"></p-slider>
+                </div>
+                <div *ngSwitchCase="'besucher'">
+                    mehr als {{besucherFilter}}
+                    <i (click)="yearFilter=null;dt.filter(null, col.field, col.filterMatchMode)" style="cursor:pointer" *ngIf="besucherFilter"></i>
+                    <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="besucherFilter" [min]="0" [max]="20" (onChange)="onBesucherChange($event, dt)"></p-slider>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+
+    <!-- der eigentliche Inhalt der Tabelle --> 
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData" align='center'>
+            <td *ngFor="let col of columns" [ngSwitch]="col.field">
+            	<span class="ui-column-title">{{col.header}}</span>
+            	<div *ngSwitchCase="'id'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" align='center'>{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'ename'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'edatum'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'eort'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'eanz'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" align='center'>{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'besucher'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" align='center'>{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'admin'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" align='center'>{{rowData[col.field]}}
+                	<a routerLink="/editevent/{{rowData['id']}}">
+            			<button pButton type="button" icon="pi pi-pencil" class="ui-button-warning"></button>  
+	            	</a>  
+	            	<a routerLink="/eventliste" routerLinkActive="active">        
+	            		<button pButton type="button" icon="pi pi-times" class="ui-button-danger" title="deleteperson" (click)="delete(rowData['id'])"></button>
+                	</a>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+    
+    <!-- footer -->
+	<ng-template pTemplate="summary">
+        <div style="text-align:right">
+        
+        	<div style="text-align:center">
+	       		{{events?.length}} Events
+			</div>
+
+            <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Event hinzufügen" class="ui-button-success"></button>
+        
+        </div>
+    </ng-template>
+    
+</p-table>
+</div>
+
+<!-- Dialogbox zum Hinzufügen -->
+<p-dialog header="Eventdetails" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="400">
+    <div class="ui-g ui-fluid">
+        
+        <div class="ui-g-12">
+        	<div class="ui-g-4 links">Eventname</div>
+            <div class="ui-g-8">
+            	<input pInputText id="ename" #ename placeholder="Eventname">
+            </div>
+        </div>
+        
+        <div class="ui-g-12">
+            <div class="ui-g-4 links">Datum</div>
+            <div class="ui-g-8">
+            	<input pInputText id="edatum" #edatum placeholder="Datum">
+            </div>
+        </div>
+        
+        <div class="ui-g-12">
+            <div class="ui-g-4 links">Ort</div>
+            <div class="ui-g-8">
+            	<input pInputText id="eort" #eort placeholder="Ort">
+            </div>
+        </div>  
+    </div>
+    
+    <p-footer>
+        <div class="ui-g-5 ui-dialog-buttonpane ui-helper-clearfix">
+			<button pButton type="button" label="Hinzufügen" class="ui-button-success"
+					(click)="addEvent(ename.value, edatum.value, eort.value); ename.value = 'Eventname'; edatum.value = 'Datum'; eort.value = 'Ort';"></button>
+		</div>
+    </p-footer>
+</p-dialog>

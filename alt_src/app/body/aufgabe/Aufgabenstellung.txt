@@ -1,0 +1,30 @@
+Folgende halbwegs kryptische Anfrage haben wir:
+
+„Eventeinladungen 4.0“ :)
+
+Für ein Event (an Bord, Land, Messe,..) sollen Einladungen per Mail verschickt werden, die einen QR Code beinhalten, der beim Empfang gescannt wird, um nachzuvollziehen welcher Gast auf dem Event war.
+
+Anforderung des fiktiven „Kunden“:
+- Login in geschützten Bereich
+- Liste an Personen verwalten (CRUD – Create, Read, Update, Delete)
+	+ Min. Vorname, Nachname, E-Mail, Firma, Foto
+- Personen können sich auf einer ungeschützten Webseite für das System anmelden und ihre Daten eintragen. Diese Personen müssen erst im System freigeschaltet werden.
+- E-Mail mit Einladung und QR Code pro Person zum Event, wenn Personen im System erstellt werden, oder freigeschaltet wurden
+- QR Code soll irgendwie durch ein Gerät, Handy, Pi,... eingescannt werden können und dabei soll der Name + Foto sichtbar sein, um die Person zu identifizieren
+- Jeder Code darf nur einmal gescannt werden – danach Hinweis, dass bereits gescannt wurde
+- Eine Auswertung wie viele Codes gescannt wurden und wer da / wer nicht da war
+
+Unsere Wünsche:
+- Nutzung des Frameworks: https://www.primefaces.org/primeng/#/ und damit auch Angular
+- Ansonsten hast du absolut freie Hand =)
+
+Zusatzaufgabe 1:
+- Personen können im System mit einem VIP Status versehen werden. Beim Scannen erhält der Scannende einen Hinweis und verteilt zusätzlich einen Gin Tonic an den Gast
+
+Zusatzaufgabe 2:
+- Verwaltung von Events (CRUD)
+	+ Min. Name, Datum, Ort
+- Personen erhalten Einladungen zu einem Event und müssen statt generell für ein entsprechendes Event freigeschaltet werden
+- Auswertung pro Event: wieviele waren da, wer und wer nicht
+
+Enrico Lorenz

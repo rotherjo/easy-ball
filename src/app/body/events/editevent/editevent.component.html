@@ -1,0 +1,52 @@
+<head>
+	<meta http-equiv='content-type' content ='text/html; charset=utf-8'>
+</head>
+
+
+<div *ngIf="event">
+	<div id="text">
+		<h2>{{event.ename}}</h2>
+		
+		<p>Hier können bereits erstellte Events editiert werden.</p>
+	</div>
+	
+		
+	<!-- Informationen -->
+	<div class="ui-g-10" id="infos">
+		<div class="ui-g">
+			<div class="ui-g-1 ui-xl-2 ui-l-2 ui-lg-3 ui-md-4 ui-sm-5" align="right">Eventname:</div>
+			<div><input #ename pInputText value="{{event.ename}}"></div>
+		</div>
+		
+		<div class="ui-g">	
+			<div class="ui-g-1 ui-xl-2 ui-l-2 ui-lg-3 ui-md-4 ui-sm-5" align="right">Datum</div>
+			<div><input #edatum pInputText value="{{event.edatum}}"></div>
+		</div>
+		
+		<div class="ui-g">	
+			<div class="ui-g-1 ui-xl-2 ui-l-2 ui-lg-3 ui-md-4 ui-sm-5" align="right">Ort:</div>
+			<div><input #eort pInputText value="{{event.eort}}"></div>
+		</div>
+		
+		<div class="ui-g">	
+			<div class="ui-g-1 ui-xl-2 ui-l-2 ui-lg-3 ui-md-4 ui-sm-5" align="right">ID:</div>
+			<div class="ui-g-1 ui-xl-1 ui-l-2 ui-lg-2 ui-md-3 ui-sm-3">{{event.id}}</div>
+		</div>
+		
+		<div class="ui-g">	
+			<div class="ui-g-1 ui-xl-2 ui-l-2 ui-lg-3 ui-md-4 ui-sm-5" align="right">Anmeldungen:</div>
+			<div class="ui-g-1 ui-xl-1 ui-l-2 ui-lg-2 ui-md-3 ui-sm-3">{{event.eanz}}</div>
+		</div>
+		
+		<div class="ui-g">	
+			<div class="ui-g-1 ui-xl-2 ui-l-2 ui-lg-3 ui-md-4 ui-sm-5" align="right">Besucher:</div>
+			<div class="ui-g-1 ui-xl-1 ui-l-2 ui-lg-2 ui-md-3 ui-sm-3">{{event.besucher}}</div>
+		</div>		
+	</div>
+	
+	<!-- Buttons Zurück & Speichern -->
+	<div class="ui-g-12" style="margin: 5px" id="buttons">
+		<button pButton type="button" icon="pi pi-arrow-left" label="Zurück" class="ui-button-warning" (click)="goBack()"></button>  
+		<button pButton type="button" icon="pi pi-check" label="Änderung speichern" class="ui-button-success" (click)="saveEvent(ename.value , edatum.value, eort.value)"></button>
+	</div>
+</div>

@@ -1,0 +1,83 @@
+<head>
+	<meta http-equiv='content-type' content ='text/html; charset=utf-8'>
+</head>
+
+<div *ngIf="person">
+	<div>
+		<h2>{{person.vname}} {{person.nname}}</h2>
+		
+		<p>Hier kann der Admin Personen komplett bearbeiten.</p>
+	</div>
+	
+	<div>
+	
+		<!-- Bild -->
+		<div class="ui-g-2 ui-xl-2 ui-l-3 ui-lg-3 ui-md-4 ui-sm-4">
+			<img src='{{person.imgurl}}' style="width:100%">
+		</div>
+		
+		<!-- Informationen -->
+		<div class="ui-g-10">
+		
+			<div class="ui-g">
+				<div class="ui-g-2 ui-xl-2 ui-l-3 ui-lg-4 ui-md-5 ui-sm-5" align="right">Vorname:</div>
+				<div><input #vname pInputText value="{{person.vname}}"></div>
+			</div>
+			
+			<div class="ui-g">	
+				<div class="ui-g-2 ui-xl-2 ui-l-3 ui-lg-4 ui-md-5 ui-sm-5" align="right">Nachname:</div>
+				<div><input #nname pInputText value="{{person.nname}}"></div>
+			</div>
+			
+			<div class="ui-g">	
+				<div class="ui-g-2 ui-xl-2 ui-l-3 ui-lg-4 ui-md-5 ui-sm-5" align="right">Mail:</div>
+				<div><input #mail pInputText value="{{person.mail}}"></div>
+			</div>
+			
+			<div class="ui-g">	
+				<div class="ui-g-2 ui-xl-2 ui-l-3 ui-lg-4 ui-md-5 ui-sm-5" align="right">Firma:</div>
+				<div><input #firma pInputText value="{{person.firma}}"></div>
+			</div>
+			
+			<div class="ui-g">	
+				<div class="ui-g-2 ui-xl-2 ui-l-3 ui-lg-4 ui-md-5 ui-sm-5" align="right">Bild-Url:</div>
+				<div><input #imgurl pInputText value="{{person.imgurl}}"></div>
+			</div>
+			
+			<div class="ui-g">	
+				<div class="ui-g-2 ui-xl-2 ui-l-3 ui-lg-4 ui-md-5 ui-sm-5" align="right">Freigeschaltet:</div>
+				<div class="ui-g-1 ui-xl-1 ui-l-2 ui-lg-2 ui-md-3 ui-sm-3" [ngClass]="person.darf ? 'gut' : 'schlecht'">{{person.darf}}</div>
+				<div>
+					<button pButton type="button" icon="pi pi-unlock"class="ui-button-success" (click)="allow(true)"></button>
+					<button pButton type="button" icon="pi pi-lock"class="ui-button-danger" (click)="allow(false)"></button>
+				</div>
+			</div>
+			
+			<div class="ui-g">	
+				<div class="ui-g-2 ui-xl-2 ui-l-3 ui-lg-4 ui-md-5 ui-sm-5" align="right">VIP:</div>
+				<div class="ui-g-1 ui-xl-1 ui-l-2 ui-lg-2 ui-md-3 ui-sm-3" [ngClass]="person.vip ? 'gut' : 'schlecht'">{{person.vip}}</div>
+				<div>
+					<button pButton type="button" icon="pi pi-angle-double-up" class="ui-button-success" (click)="vip(true)"></button>
+					<button pButton type="button" icon="pi pi-angle-double-down" class="ui-button-danger" (click)="vip(false)"></button>
+				</div>
+			</div>
+			
+			<div class="ui-g">	
+				<div class="ui-g-2 ui-xl-2 ui-l-3 ui-lg-4 ui-md-5 ui-sm-5" align="right">Gescannt:</div>
+				<div class="ui-g-1 ui-xl-1 ui-l-2 ui-lg-2 ui-md-3 ui-sm-3"  [ngClass]="person.gescannt ? 'schlecht': 'gut'">{{person.gescannt}}</div>
+				<div>
+					<button pButton type="button" icon="pi pi-refresh" class="ui-button-success" (click)="scan(false)"></button>
+					<button pButton type="button" icon="pi pi-ban" class="ui-button-danger" (click)="scan(true)" ></button>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	<div class="ui-g-12" style="margin: 5px">
+		<button pButton type="button" icon="pi pi-arrow-left" label="Zurück" class="ui-button-warning" (click)="goBack()"></button>
+		<button pButton type="button" icon="pi pi-check" label="Änderungen speichern" class="ui-button-success" (click)="savePerson(vname.value, nname.value, mail.value, firma.value, imgurl.value)"></button>
+	</div>
+	</div>
+
+

@@ -1,0 +1,58 @@
+<head>
+	<meta http-equiv='content-type' content ='text/html; charset=utf-8'>
+</head>
+
+<h2>Personenliste</h2>
+<p>
+  Hier soll eine Liste der Personen hin mit:
+</p>
+<ul>
+	<li>Vorname</li>
+	<li>Nachname</li>
+	<li>E-Mail</li>
+	<li>Firma</li>
+	<li>Foto (aktuell nur per URL)</li>
+</ul>
+
+
+<p-table [value]="persons" [autoLayout]=true>
+    <!-- header der Tabelle -->
+    <ng-template pTemplate="header">
+        <tr>
+        	<th>ID</th>
+            <th>Vorname</th>
+            <th>Nachname</th>
+            <th>E-Mail</th>
+            <th>Firma</th>
+            <th>Foto</th>
+            <th>Admin</th>
+        </tr>
+    </ng-template>
+
+    <!--  body der Tabelle -->
+    <ng-template pTemplate="body" let-person>
+    	<tr>
+            <td align='center'>{{person.id}}</td>
+            <td>{{person.vname}}</td>
+            <td>{{person.nname}}</td>
+            <td>{{person.mail}}</td>
+            <td>{{person.firma}}</td>
+            <td align='center'><img src="{{person.imgurl}}" height="50" width="50"></td>
+            <td><button pButton type="button" icon="pi pi-pencil" class="ui-button-warning"></button>            
+            	<button pButton type="button" icon="pi pi-times" class="ui-button-danger" title="deleteperson" (click)="delete(person)"></button></td>
+        </tr>
+    </ng-template>
+    
+    <!-- Hinzufügezeile der Tabelle -->
+    <ng-template pTemplate="footer">
+		<tr>
+		    <td></td>
+		    <td><input #vname placeholder="Vorname"></td>
+		    <td><input #nname placeholder="Nachname"></td>
+		    <td><input #mail placeholder="E-Mail" type="email"></td>
+		    <td><input #firma placeholder="Firma"></td>
+		    <td><input #imgurl placeholder="Bild-URL" type="url"></td>
+		    <td><button pButton type="button" (click)="addPerson(vname.value, nname.value, mail.value, firma.value, imgurl.value); vname.value = 'Vorname'; nname.value = 'Nachname'; mail.value = 'E-Mail'; firma.value = 'Firma'; imgurl.value = 'Bild-URL';" label="Hinzufügen" class="ui-button-success"></button> </td>
+		</tr>
+    </ng-template>
+</p-table>

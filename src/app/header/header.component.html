@@ -1,0 +1,37 @@
+<div class="ui-g-12">
+
+	<!-- Menü einbinden -->
+	<div class="ui-g-1 ui-xl-1 ui-l-1 ui-lg-1 ui-md-2 ui-sm-2">
+		<app-menu></app-menu>
+	</div>
+	
+	<!-- Logo -->
+	<div class="ui-g-1 ui-xl-1 ui-l-1 ui-lg-1 ui-md-1 ui-sm-2">
+		<img alt="logo" style="width:50px" src='./../../../Images/logo-kl.png' align="right">
+	</div>
+	
+	<!-- Firmenname -->
+	<div class="ui-g-4 ui-xl-4 ui-l-4 ui-lg-5 ui-md-5 ui-sm-6">
+		<h1>{{ firmenname }}</h1>
+	</div>
+	
+	<!-- Kontakt, Login, etc -->
+	<div class="ui-g-2 	
+				ui-xl-3 
+				ui-l-3 	
+				ui-lg-4 
+				ui-md-4 
+				ui-sm-12 
+				pull-right" align="right">
+		
+		<a routerLink="/kontakt">
+			<button pButton class="ui-button-success but" label="Kontakt" ></button>
+		</a>
+		
+		<a routerLink="/login">
+			<button pButton class="ui-button-success but" label="Login"></button>
+		</a>
+		
+	</div>		
+</div>
+

@@ -1,0 +1,24 @@
+Angular installieren
+	npm install -g @angular/cli
+	
+Projekt erstellen
+	ng new projektname
+	
+Server erstellen und im Browser öffnen
+	ng serve --open
+
+Component erstellen
+	ng generate component Name
+
+Service erstellen
+	ng generate service Name
+
+Routing Modul erstellen
+	ng generate module app-routing --flat --module=app
+
+In Memory API installieren	
+	npm install angular-in-memory-web-api --save
+
+PrimeNG installieren
+	npm install primeng --save
+	npm install primeicons --save

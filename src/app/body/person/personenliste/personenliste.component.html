@@ -1,0 +1,138 @@
+<head>
+	<meta http-equiv='content-type' content ='text/html; charset=utf-8'>
+</head>
+
+<!-- Text -->
+<div style="margin: 5px" id="text">
+	<h2>Personenliste</h2>
+	<p>
+	  Liste der Personen, die in der Datenbank sind - auch noch nicht freigeschaltene Personen und jene, deren Code bereits gescannt wurde.
+	</p>
+</div>
+
+<!-- p-table von PrimeNG -->
+<div style="margin: 5px" id="personen-tabelle">
+<p-table #dt [columns]="selectedColumns" [value]="persons" [paginator]="true" [rows]="4" [autoLayout]=true [responsive]="true">
+    <!-- globales Suchfeld -->
+    <ng-template pTemplate="caption">
+	    	<div style="text-align:left">
+	            <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+	                        selectedItemsLabel="{0} Spalten ausgewählt" [style]="{minWidth: '200px'}" defaultLabel="Wähle Spalten"></p-multiSelect>
+	        </div>
+	        <div style="text-align: right">        
+	            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+	            <input type="text" pInputText size="25" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+	        </div>
+    </ng-template>
+    
+    <!--  header der Tabelle -->
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+        	<!-- Kopfzeile mit Beschriftung der Spalten -->
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+        <tr>
+        	<!-- Suchfelder der Spalten -->
+            <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                <input *ngSwitchCase="'id'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" size="2">
+                <input *ngSwitchCase="'vname'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" size="10">
+                <input *ngSwitchCase="'nname'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" size="10">
+                <input *ngSwitchCase="'mail'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                <input *ngSwitchCase="'firma'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                <p-dropdown *ngSwitchCase="'darf'" [options]="bools" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                <p-dropdown *ngSwitchCase="'vip'" [options]="bools" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                <p-dropdown *ngSwitchCase="'gescannt'" [options]="bools" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+            </th>
+        </tr>
+    </ng-template>
+    
+    <!-- der eigentliche Inhalt der Tabelle --> 
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData" align='center'>
+            <td *ngFor="let col of columns" [ngSwitch]="col.field">
+            	<span class="ui-column-title">{{col.header}}</span>
+            	<div *ngSwitchCase="'id'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" align='center'>{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'vname'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'nname'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'mail'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'firma'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'imgurl'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" align='center'><img src="{{rowData[col.field]}}" height="50" width="50"></div>
+                <div *ngSwitchCase="'darf'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" align='center'>{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'vip'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" align='center'>{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'gescannt'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" align='center'>{{rowData[col.field]}}</div>
+                <div *ngSwitchCase="'admin'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" align='center'>
+                	<a routerLink="/editperson/{{rowData['id']}}">
+            			<button pButton type="button" icon="pi pi-pencil" class="ui-button-warning"></button>  
+	            	</a>  
+	            	<a routerLink="/personenliste" routerLinkActive="active">        
+	            		<button pButton type="button" icon="pi pi-times" class="ui-button-danger" title="deleteperson" (click)="delete(rowData['id'])"></button>
+                	</a>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+    
+    <!-- footer -->
+	<ng-template pTemplate="summary">
+        <div style="text-align:right">
+        
+        	<div style="text-align:center">
+	       		{{persons?.length}} Personen
+			</div>
+        
+        	<button pButton type="button" icon="pi pi-user-plus" class="ui-button-warning" title="addperson" (click)="add()" label="Irgendwen hinzufügen"></button>
+            <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Per Einagbe hinzufügen" class="ui-button-success"></button>
+        
+        </div>
+    </ng-template>
+
+</p-table>
+</div>
+
+<!-- Dialogbox zum Hinzufügen -->
+<p-dialog header="Personendetails" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="400">
+    <div class="ui-g ui-fluid">
+        
+        <div class="ui-g-12">
+        	<div class="ui-g-4 links">Vorname</div>
+            <div class="ui-g-8">
+            	<input pInputText id="vname" #vname placeholder="Vorname">
+            </div>
+        </div>
+        
+        <div class="ui-g-12">
+            <div class="ui-g-4 links">Nachname</div>
+            <div class="ui-g-8">
+            	<input pInputText id="nname" #nname placeholder="Nachname">
+            </div>
+        </div>
+        
+        <div class="ui-g-12">
+            <div class="ui-g-4 links">Mail</div>
+            <div class="ui-g-8">
+            	<input pInputText id="mail" #mail placeholder="Mail">
+            </div>
+        </div>
+        <div class="ui-g-12">
+            <div class="ui-g-4 links">Firma</div>
+            <div class="ui-g-8">
+            	<input pInputText id="firma" #firma placeholder="Firma">
+            </div>
+        </div>
+        <div class="ui-g-12">
+            <div class="ui-g-4 links">Bild-URL</div>
+            <div class="ui-g-8">
+            	<input pInputText id="imgurl" #imgurl placeholder="Bild-URL">
+            </div>
+        </div>
+    </div>
+    
+    <p-footer>
+        <div class="ui-g-5 ui-dialog-buttonpane ui-helper-clearfix">
+            <button pButton type="button" label="Hinzufügen" class="ui-button-success"
+            (click)="addPerson(vname.value, nname.value, mail.value, firma.value, imgurl.value); vname.value = 'Vorname'; nname.value = 'Nachname'; mail.value = 'E-Mail'; firma.value = 'Firma'; imgurl.value = 'Bild-URL';"></button> 
+        </div>
+    </p-footer>
+</p-dialog>

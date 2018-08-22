@@ -1,0 +1,59 @@
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+
+<h2>Eventliste</h2>
+<p>
+  Hier soll eine Liste der Events hin mit:
+</p>
+<ul>
+	<li>Name</li>
+	<li>Datum</li>
+	<li>Ort</li>
+	<li>Anmeldungen/Teilnehmer</li>
+</ul>
+
+<p-table [value]="events" [autoLayout]=true>
+    <!-- header der Tabelle -->
+    <ng-template pTemplate="header">
+        <tr>
+        	<th>ID</th>
+            <th>Eventame</th>
+            <th>Datum</th>
+            <th>Ort</th>
+            <th>Anmeldungen</th>
+            <th>Besucher</th>
+            <th>Admin</th>
+        </tr>
+    </ng-template>
+    
+    <!-- body der Tabelle -->
+    <ng-template pTemplate="body" let-event>
+        <tr>
+            <td align='center'>{{event.id}}</td>
+            <td>{{event.ename}}</td>
+            <td>{{event.edate | date : "dd.MM.y"}}</td>
+            <td>{{event.eort}}</td>
+            <td align='center'>{{event.ecount}}</td>
+            <td align='center'>{{event.besucher}}</td>
+            <td><a routerLink="/editevent/{{event.id}}">
+            		<button pButton type="button" icon="pi pi-pencil" class="ui-button-warning"></button>
+            	</a>           
+            	<button pButton type="button" icon="pi pi-times" class="ui-button-danger" title="deleteEvent" (click)="delete(event)"></button></td>
+        </tr>
+    </ng-template>
+	
+	<!-- Hinzufügezeile der Tabelle -->
+    <ng-template pTemplate="footer">
+		<tr>
+		    <td></td>
+		    <td><input #ename placeholder="Eventname"></td>
+		    <td><input #edate placeholder="Datum" size="8"></td>
+		    <!-- <td><p-calendar [(ngModel)]="value" dateFormat="dd.mm.yy" placeholder="Datum"></p-calendar></td> -->
+		    <td><input #eort placeholder="Ort"></td>
+		    <td></td>
+		    <td></td>
+		    <td><button pButton type="button" (click)="addEvent(ename.value, edate.value, eort.value); ename.value = 'Eventname'; edate.value = 'Datum'; eort.value = 'Ort';" label="Hinzufügen" class="ui-button-success"></button> </td>
+		</tr>
+    </ng-template>
+</p-table>

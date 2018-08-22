@@ -1,0 +1,24 @@
+
+h1 {
+	color: green !important;
+}
+
+.but {
+	background-color: green !important;
+	border-color: lightgreen !important;
+	width: 100px;
+}
+
+.but:hover {
+	background-color: darkgreen !important;
+	
+}
+
+.navi {
+	position: absolute;
+	right: 30px;
+}
+
+div {
+/*	border: 1px solid #73AD21 !important; */
+}

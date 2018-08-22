@@ -1,0 +1,13 @@
+div {
+	border: 1px solid #73AD21;
+}
+
+.gut {
+    background-color: green !important;
+    color: #ffffff !important;
+}
+
+.schlecht {
+    background-color: red !important;
+    color: #ffffff !important;
+}
