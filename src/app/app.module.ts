@@ -6,12 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 /* PrimeNG */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InputTextModule, ButtonModule } from 'primeng/primeng';
+import {    InputTextModule, 
+            ButtonModule,
+            DropdownModule,
+            SliderModule } from 'primeng/primeng';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
-import { DropdownModule } from 'primeng/primeng';
-import { SliderModule } from 'primeng/primeng';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { MenuModule } from 'primeng/menu';
@@ -73,7 +74,6 @@ import { KontaktComponent } from './header/kontakt/kontakt.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    ButtonModule,
     HttpClientModule,
     
     // QR
@@ -82,6 +82,7 @@ import { KontaktComponent } from './header/kontakt/kontakt.component';
     NgQRCodeReaderModule,
     
     // PrimeNG
+    ButtonModule,
     PanelMenuModule,
     TieredMenuModule,
     AppRoutingModule,
