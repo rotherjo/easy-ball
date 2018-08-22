@@ -657,15 +657,15 @@ if(false) {}
 
 /***/ 2:
 /*!********************************************************************************************************************************************************************************!*\
-  !*** multi ./src/styles.css ./node_modules/primeicons/primeicons.css ./node_modules/primeng/resources/themes/omega/theme.css ./node_modules/primeng/resources/primeng.min.css ***!
+  !*** multi ./node_modules/primeng/resources/themes/omega/theme.css ./node_modules/primeng/resources/primeng.min.css ./node_modules/primeicons/primeicons.css ./src/styles.css ***!
   \********************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\workspace\angular\easyBall\src\styles.css */"./src/styles.css");
-__webpack_require__(/*! D:\workspace\angular\easyBall\node_modules\primeicons\primeicons.css */"./node_modules/primeicons/primeicons.css");
 __webpack_require__(/*! D:\workspace\angular\easyBall\node_modules\primeng\resources\themes\omega\theme.css */"./node_modules/primeng/resources/themes/omega/theme.css");
-module.exports = __webpack_require__(/*! D:\workspace\angular\easyBall\node_modules\primeng\resources\primeng.min.css */"./node_modules/primeng/resources/primeng.min.css");
+__webpack_require__(/*! D:\workspace\angular\easyBall\node_modules\primeng\resources\primeng.min.css */"./node_modules/primeng/resources/primeng.min.css");
+__webpack_require__(/*! D:\workspace\angular\easyBall\node_modules\primeicons\primeicons.css */"./node_modules/primeicons/primeicons.css");
+module.exports = __webpack_require__(/*! D:\workspace\angular\easyBall\src\styles.css */"./src/styles.css");
 
 
 /***/ })
