@@ -11,7 +11,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/primeng';
-import { Slider } from 'primeng/primeng';
+import { SliderModule } from 'primeng/primeng';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { MenuModule } from 'primeng/menu';
@@ -66,7 +66,6 @@ import { KontaktComponent } from './header/kontakt/kontakt.component';
     QrscannerComponent,
     
     // PrimeNG
-    Slider,
     MenuComponent,
     KontaktComponent,
   ],
@@ -96,6 +95,7 @@ import { KontaktComponent } from './header/kontakt/kontakt.component';
     CalendarModule,
     InputTextModule,
     DialogModule,
+    SliderModule,
     
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.

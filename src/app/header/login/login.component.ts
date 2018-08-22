@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   
-  loginUser(event) {
+  loginUser1(event) {
     event.preventDefault();
     const target = event.target;
     
@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit {
     
     this.Auth.getUserDetails(nutzer, pw);
     console.log(nutzer, pw);
+  }
+  
+  loginUser(event) {
+    
   }
 
 
